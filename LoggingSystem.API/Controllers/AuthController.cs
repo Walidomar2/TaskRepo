@@ -9,9 +9,11 @@ namespace LoggingSystem.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
-        public AuthController(UserManager<IdentityUser> userManager)
+        private readonly ITokenRepository _tokenRepository;
+        public AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository)
         {
             _userManager = userManager;
+            _tokenRepository = tokenRepository;
         }
 
         [HttpPost]
@@ -42,6 +44,7 @@ namespace LoggingSystem.API.Controllers
             return BadRequest("Something went wrong");
         }
 
+
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequstModel)
@@ -55,12 +58,26 @@ namespace LoggingSystem.API.Controllers
                 if (checkPasswordResult)
                 {
                     // Create Token
-                    return Ok();
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    if (roles != null && roles.Any())
+                    {
+                        //Creating a Token
+                        var token = _tokenRepository.CreateJwtToken(user, roles.ToList());
+
+                        var response = new LoginResponseDto
+                        {
+                            JwtToken = token
+                        };
+                        // Return ok with the generated token
+                        return Ok(response);
+                    }
                 }
             }
 
             return BadRequest("Username or Password incorrect");
         }
+
 
     }
 }
