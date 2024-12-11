@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LoggingSystem.API.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace LoggingSystem.API.Controllers
 {
     [Route("v1/logs")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class LogsController : ControllerBase
     {
         private readonly ILogRepository _logRepository;
