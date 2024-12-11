@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using LoggingSystem.API.Interfaces;
+using LoggingSystem.API.Action_Filters;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoggingSystem.API.Controllers
@@ -22,6 +20,7 @@ namespace LoggingSystem.API.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> Create([FromBody] CreateLogDto createModel)
         {
             var logDomain = _mapper.Map<Log>(createModel);
@@ -75,6 +74,7 @@ namespace LoggingSystem.API.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [ValidateModel]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateLogDto updateModel)
         {
             var logDomain = _mapper.Map<Log>(updateModel);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LoggingSystem.API.Action_Filters;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace LoggingSystem.API.Controllers
 {
     [Route("v1/auth")]
     [ApiController]
+    
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -16,6 +18,7 @@ namespace LoggingSystem.API.Controllers
             _tokenRepository = tokenRepository;
         }
 
+        [ValidateModel]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequstModel)
@@ -41,7 +44,7 @@ namespace LoggingSystem.API.Controllers
                 }
             }
 
-            return BadRequest("Something went wrong");
+            return BadRequest(ModelState);
         }
 
 
