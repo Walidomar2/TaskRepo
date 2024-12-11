@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace LoggingSystem.API.Dtos
+﻿namespace LoggingSystem.API.Dtos
 {
     public class LogDto
     {
