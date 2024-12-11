@@ -40,9 +40,27 @@ namespace LoggingSystem.API.Controllers
             }
 
             return BadRequest("Something went wrong");
-
         }
 
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequstModel)
+        {
+            var user = await _userManager.FindByEmailAsync(loginRequstModel.Username);
+
+            if (user != null)
+            {
+                var checkPasswordResult = await _userManager.CheckPasswordAsync(user, loginRequstModel.Password);
+
+                if (checkPasswordResult)
+                {
+                    // Create Token
+                    return Ok();
+                }
+            }
+
+            return BadRequest("Username or Password incorrect");
+        }
 
     }
 }
