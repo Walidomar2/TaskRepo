@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 
 // Inject the Dependencies 
 builder.Services.AddScoped<ILogRepository, LogRepository>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 //Adding the Identity of the users
