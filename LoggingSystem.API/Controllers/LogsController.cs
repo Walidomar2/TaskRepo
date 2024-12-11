@@ -51,9 +51,12 @@ namespace LoggingSystem.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? service, [FromQuery] string? level, [FromQuery] DateTime? start_time, [FromQuery] DateTime? end_time)
+        public async Task<IActionResult> GetAll([FromQuery] string? service, [FromQuery] string? level,
+            [FromQuery] DateTime? start_time, [FromQuery] DateTime? end_time,
+             [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
         {
-            var logsDomain = await _logRepository.GetAllAsync(service, level, start_time, end_time);
+            var logsDomain = await _logRepository.GetAllAsync(service, level, start_time
+                                                    , end_time,pageNumber, pageSize);
 
             return Ok(_mapper.Map<List<LogDto>>(logsDomain));
         }

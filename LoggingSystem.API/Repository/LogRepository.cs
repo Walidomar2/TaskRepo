@@ -38,7 +38,8 @@ namespace LoggingSystem.API.Repository
             return logModel;
         }
 
-        public async Task<IEnumerable<Log>> GetAllAsync(string? service, string? level, DateTime? start_time, DateTime? end_time)
+        public async Task<IEnumerable<Log>> GetAllAsync(string? service, string? level, DateTime? start_time
+            , DateTime? end_time, int pageNumber = 1, int pageSize = 1000)
         {
             var logsQuery = _context.Logs.AsQueryable();
 
@@ -54,7 +55,7 @@ namespace LoggingSystem.API.Repository
             if (end_time.HasValue)
                 logsQuery = logsQuery.Where(log => log.Timestamp <= end_time.Value);
 
-            var logs = await logsQuery.ToListAsync();
+            var logs = await logsQuery.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return logs;
         }
