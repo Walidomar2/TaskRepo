@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingSystem.API", "LoggingSystem.API\LoggingSystem.API.csproj", "{21238020-7FE0-42DC-8F20-96EA0B3DF2B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingSystem.API", "LoggingSystem.API\LoggingSystem.API.csproj", "{21238020-7FE0-42DC-8F20-96EA0B3DF2B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogginSystem.Tests", "LogginSystem.Tests\LogginSystem.Tests.csproj", "{37E5E347-C420-4FC8-94CD-A1C0593858FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{21238020-7FE0-42DC-8F20-96EA0B3DF2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21238020-7FE0-42DC-8F20-96EA0B3DF2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21238020-7FE0-42DC-8F20-96EA0B3DF2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E5E347-C420-4FC8-94CD-A1C0593858FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E5E347-C420-4FC8-94CD-A1C0593858FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E5E347-C420-4FC8-94CD-A1C0593858FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E5E347-C420-4FC8-94CD-A1C0593858FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

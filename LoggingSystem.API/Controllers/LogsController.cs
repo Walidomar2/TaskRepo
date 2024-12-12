@@ -7,7 +7,7 @@ namespace LoggingSystem.API.Controllers
 {
     [Route("v1/logs")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles ="Admin")]
     public class LogsController : ControllerBase
     {
         private readonly ILogRepository _logRepository;
