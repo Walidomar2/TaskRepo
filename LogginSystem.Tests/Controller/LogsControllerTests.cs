@@ -12,11 +12,13 @@ namespace LogginSystem.Tests.Controller
     {
         private readonly ILogRepository _logRepository;
         private readonly IMapper _mapper;
+        private readonly ILogStorage _logStorage;
 
         public LogsControllerTests()
         {
             _logRepository = A.Fake<ILogRepository>();
             _mapper = A.Fake<IMapper>();
+            _logStorage = A.Fake<ILogStorage>();
         }
 
         [Fact]
@@ -26,7 +28,7 @@ namespace LogginSystem.Tests.Controller
             var logDtos = A.Fake<ICollection<LogDto>>();
             var logDtosList = A.Fake<List<LogDto>>();
             A.CallTo(()=> _mapper.Map<List<LogDto>>(logDtos)).Returns(logDtosList);
-            var controller = new LogsController(_logRepository, _mapper);
+            var controller = new LogsController(_logRepository, _mapper, _logStorage);
 
             //Act
             var result = await controller.GetAll(null, null,null, null);
@@ -47,7 +49,7 @@ namespace LogginSystem.Tests.Controller
             createdLogDto.Message = "Mock Test Message";
             createdLogDto.Timestamp = DateTime.Now;
 
-            var controller = new LogsController(_logRepository, _mapper);
+            var controller = new LogsController(_logRepository, _mapper, _logStorage);
 
             var result = await controller.Create(createdLogDto);
 

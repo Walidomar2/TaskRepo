@@ -12,11 +12,15 @@ namespace LoggingSystem.API.Controllers
     {
         private readonly ILogRepository _logRepository;
         private readonly IMapper _mapper;
+        private readonly ILogStorage _logStorage;
 
-        public LogsController(ILogRepository logRepository, IMapper mapper)
+        public LogsController(ILogRepository logRepository
+                              , IMapper mapper
+                              , ILogStorage logStorage)
         {
             _logRepository = logRepository;
             _mapper = mapper;
+            _logStorage = logStorage;
         }
 
         [HttpPost]
@@ -25,6 +29,10 @@ namespace LoggingSystem.API.Controllers
         {
             var logDomain = _mapper.Map<Log>(createModel);
             var result = await _logRepository.CreateAsync(logDomain);
+
+            // it will store the log into the local database 
+
+           // await _logStorage.SaveLogAsync(logDomain);
 
             if (result is null)
                 return BadRequest(ModelState);

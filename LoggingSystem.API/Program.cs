@@ -1,4 +1,5 @@
 using LoggingSystem.API.Middlewares;
+using LoggingSystem.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,10 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddScoped<ILogRepository, LogRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
+
+builder.Services.AddScoped<ILogStorage>(provider =>
+    new S3LogStorage(new HttpClient(), builder.Configuration["Storage:S3BucketUrl"])
+);
 
 //Adding the Identity of the users
 builder.Services.AddIdentityCore<IdentityUser>()
